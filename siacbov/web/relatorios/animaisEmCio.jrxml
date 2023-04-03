@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c998359-cfac-4431-a01c-0e90e69af937">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     cio.`cio_id` AS cio_cio_id,
+     cio.`cio_codigo` AS cio_cio_codigo,
+     cio.`cio_dt_registro` AS cio_cio_dt_registro,
+     cio.`cio_hr_registro` AS cio_cio_hr_registro,
+     cio.`cio_dt_inicio` AS cio_cio_dt_inicio,
+     cio.`cio_hr_inicio` AS cio_cio_hr_inicio,
+     cio.`cio_dt_prev_termino` AS cio_cio_dt_prev_termino,
+     cio.`cio_hr_prev_termino` AS cio_cio_hr_prev_termino,
+     cio.`cio_animal_fk` AS cio_cio_animal_fk,
+     animal.`ani_id` AS animal_ani_id,
+     animal.`ani_codigo` AS animal_ani_codigo,
+     animal.`ani_apelido` AS animal_ani_apelido,
+     animal.`ani_sensor_fk` AS animal_ani_sensor_fk,
+     sensor.`sen_id` AS sensor_sen_id,
+     sensor.`sen_codigo` AS sensor_sen_codigo
+FROM
+     `animal` animal INNER JOIN `cio` cio ON animal.`ani_id` = cio.`cio_animal_fk`
+     INNER JOIN `sensor` sensor ON animal.`ani_sensor_fk` = sensor.`sen_id`
+WHERE cio.`cio_status` = 'CONFIRMADO']]>
+	</queryString>
+	<field name="cio_cio_id" class="java.lang.Integer"/>
+	<field name="cio_cio_codigo" class="java.lang.String"/>
+	<field name="cio_cio_dt_registro" class="java.sql.Date"/>
+	<field name="cio_cio_hr_registro" class="java.sql.Time"/>
+	<field name="cio_cio_dt_inicio" class="java.sql.Date"/>
+	<field name="cio_cio_hr_inicio" class="java.sql.Time"/>
+	<field name="cio_cio_dt_prev_termino" class="java.sql.Date"/>
+	<field name="cio_cio_hr_prev_termino" class="java.sql.Time"/>
+	<field name="cio_cio_animal_fk" class="java.lang.Integer"/>
+	<field name="animal_ani_id" class="java.lang.Integer"/>
+	<field name="animal_ani_codigo" class="java.lang.String"/>
+	<field name="animal_ani_apelido" class="java.lang.String"/>
+	<field name="animal_ani_sensor_fk" class="java.lang.Integer"/>
+	<field name="sensor_sen_id" class="java.lang.Integer"/>
+	<field name="sensor_sen_codigo" class="java.lang.String"/>
+	<group name="cio_cio_dt_registro">
+		<groupExpression><![CDATA[$F{cio_cio_dt_registro}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="3" width="555" height="21" forecolor="#B89F7D" backcolor="#CCCCCC" uuid="787cc309-481e-47c2-833c-60de7ba035b8"/>
+					<rectangle>
+						<reportElement mode="Opaque" x="2" y="2" width="36" height="17" backcolor="#736343" uuid="6944157a-61a2-4d64-afb9-48a3670fed24"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField pattern="dd/MM/yyyy">
+						<reportElement style="SubTitle" stretchType="RelativeToBandHeight" x="42" y="2" width="57" height="18" forecolor="#999900" uuid="1b1f41f7-ab28-4c52-bdd5-5aaff518de9a"/>
+						<textElement>
+							<font size="14" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{animal_ani_codigo}]]></textFieldExpression>
+					</textField>
+					<textField pattern="dd/MM/yyyy">
+						<reportElement style="SubTitle" stretchType="RelativeToBandHeight" x="116" y="2" width="168" height="18" forecolor="#999900" uuid="f7f8319d-e712-4954-bd5c-f07c4bf8ebf5"/>
+						<textElement>
+							<font size="14" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{animal_ani_apelido}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement x="99" y="5" width="16" height="18" forecolor="#999900" uuid="cae34764-ee69-45d3-a486-9918702394ce"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="14"/>
+					</textElement>
+					<text><![CDATA[-]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="1" y="60" width="554" height="26" uuid="8b9006be-f291-43d0-b3e4-6ffdd5b779b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Animais atualmente em cio]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="555" height="60" uuid="e2fd9687-95fd-4af0-9b83-5a1449bf5a26"/>
+				<imageExpression><![CDATA["C:\\Users\\JV\\Documents\\NetBeansProjects\\siac\\web\\relatorios\\rel_topo.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="94" width="555" height="1" uuid="2093a213-4b1c-4387-9e86-5b6565bce3d2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="88" y="0" width="55" height="15" uuid="efa76ef1-4528-4799-9ed6-228e651dd484"/>
+				<textFieldExpression><![CDATA[$F{cio_cio_codigo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="191" y="0" width="63" height="15" uuid="4edd9c14-c141-470d-a87b-c3c3b05dcb64"/>
+				<textFieldExpression><![CDATA[$F{cio_cio_dt_inicio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="HH:mm">
+				<reportElement style="Detail" x="254" y="0" width="53" height="15" uuid="e458d4d6-10ad-45f3-bc9d-bbad7a05f8a4"/>
+				<textFieldExpression><![CDATA[$F{cio_cio_hr_inicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="1" y="0" width="87" height="15" forecolor="#736343" uuid="9572ac6b-a4e7-41bb-a708-9da8dbfe8f04"/>
+				<text><![CDATA[Código do Cio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="153" y="0" width="38" height="15" forecolor="#736343" uuid="09dca161-d90d-4ba3-8f98-e2ba174696b5"/>
+				<text><![CDATA[Início:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="315" y="0" width="110" height="15" forecolor="#736343" uuid="6306cf3f-9363-4b2b-b2e0-d594d1764259"/>
+				<text><![CDATA[Previsão Término:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="425" y="0" width="63" height="15" uuid="58773c70-5472-4e2f-a587-473675d219d1"/>
+				<textFieldExpression><![CDATA[$F{cio_cio_dt_prev_termino}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="HH:mm">
+				<reportElement style="Detail" x="488" y="0" width="53" height="15" uuid="fa4155a6-77e6-4cbc-aa00-b91e99258e00"/>
+				<textFieldExpression><![CDATA[$F{cio_cio_hr_prev_termino}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="32" width="555" height="1" uuid="5d2f55c9-bb3f-4941-9dd1-c299ec0a01d6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="8d06ba45-f209-4ba4-bff1-9a2fc246a2e8"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343" uuid="f07fd704-0f18-41e3-ba88-210f4fab48d5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343" uuid="4a44c954-eb2c-4866-b06e-8b9673fd489a"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="7a7e660b-8228-466b-b712-721da7805fe7"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
